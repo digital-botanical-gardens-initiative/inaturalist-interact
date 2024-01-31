@@ -4,6 +4,7 @@
         "reqwest"
     ],
     "rust-analyzer.linkedProjects": [
+        "./inaturalist-interact/Cargo.toml",
         "./inaturalist-interact/Cargo.toml"
     ]
 }

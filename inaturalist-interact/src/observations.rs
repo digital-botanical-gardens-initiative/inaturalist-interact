@@ -1,8 +1,6 @@
-// observations.rs
-
 use inaturalist::apis::configuration;
 use inaturalist::apis::observations_api::{observations_id_get, ObservationsIdGetParams};
-use reqwest::Error as ReqwestError;
+use std::error::Error;
 
 /// Fetches an observation from the iNaturalist API based on the given observation ID.
 ///
@@ -12,20 +10,17 @@ use reqwest::Error as ReqwestError;
 ///
 /// # Returns
 ///
-/// This function returns a `Result` which is either the fetched observation on success
+/// This function returns a `Result` which is either the raw JSON string on success
 /// or an error on failure.
-pub async fn get_observation(observation_id: i32) -> Result<String, ReqwestError> {
+pub async fn get_observation(observation_id: i32) -> Result<String, Box<dyn Error>> {
     let mut config = configuration::Configuration::default();
-    
-    // Set the base URL for the API
     config.base_path = "https://api.inaturalist.org/v1".to_string();
 
     let observation_params = ObservationsIdGetParams {
         id: vec![observation_id],
     };
 
-    match observations_id_get(&config, observation_params).await {
-        Ok(response) => Ok(format!("Observation Response: {:?}", response)),
-        Err(e) => Err(e),
-    }
+    let response = observations_id_get(&config, observation_params).await?;
+    let raw_json = serde_json::to_string(&response)?;
+    Ok(raw_json)
 }
