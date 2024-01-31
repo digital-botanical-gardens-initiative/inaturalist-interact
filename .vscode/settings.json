@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
-        "inaturalist"
+        "inaturalist",
+        "reqwest"
+    ],
+    "rust-analyzer.linkedProjects": [
+        "./inaturalist-interact/Cargo.toml"
     ]
 }

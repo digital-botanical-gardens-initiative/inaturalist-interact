@@ -1,20 +1,23 @@
-use inaturalist::apis::observations_api::observations_id_get;
-use inaturalist::apis::configuration;
-use inaturalist::apis::observations_api::ObservationsIdGetParams;
+// main.rs
+mod observations;
+use observations::get_observation;
+// use projects::get_project_info;
 
 #[tokio::main]
 async fn main() {
-    let mut config = configuration::Configuration::default();
-    
-    // Set the base URL for the API
-    config.base_path = "https://api.inaturalist.org/v1".to_string();
-
-    let observation_id = ObservationsIdGetParams {
-        id: vec![195925099],
-    };
-
-    match observations_id_get(&config, observation_id).await {
-        Ok(response) => println!("Response: {:?}", response),
+    let observation_id = 195925099;
+    match get_observation(observation_id).await {
+        Ok(response) => println!("Observation Response: {:?}", response),
         Err(e) => eprintln!("Error: {:?}", e),
     }
+
+    // let project_id = 12345; // Example project ID
+    // match get_project_info(project_id).await {
+    //     Ok(response) => println!("Project Response: {:?}", response),
+    //     Err(e) => eprintln!("Error: {:?}", e),
+    // }
 }
+
+
+// config.rs
+// Configuration-related functionality
