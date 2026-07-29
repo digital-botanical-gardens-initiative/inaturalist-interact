@@ -1,6 +1,11 @@
 # inaturalist-interact
 
-Utilities for preparing, fetching, and pushing DBGI observation data to iNaturalist.
+Typed, tested utilities for retrieving and publishing Digital Botanical Gardens
+Initiative (DBGI) data through iNaturalist.
+
+The repository is being rebuilt incrementally. The first new workflow retrieves a
+complete metadata snapshot for any iNaturalist project and derives the links between
+observations and DBGI sample IDs stored in observation tags.
 
 ## Setup
 
@@ -16,7 +21,75 @@ Run tests:
 uv run pytest -q
 ```
 
-## Pushing observations
+## Retrieve a project metadataset
+
+The default command retrieves every observation in the
+[Digital Botanical Gardens Initiative project](https://www.inaturalist.org/projects/digital-botanical-gardens-initiative):
+
+```bash
+uv run inaturalist-interact fetch-project
+```
+
+By default, files are written to:
+
+```text
+data/exports/digital-botanical-gardens-initiative/
+```
+
+Choose another output directory or project by passing a project ID, slug, or URL:
+
+```bash
+uv run inaturalist-interact fetch-project \
+  https://www.inaturalist.org/projects/digital-botanical-gardens-initiative \
+  --output /path/to/snapshot
+```
+
+Retrieval uses the public iNaturalist API and does not require an access token.
+Set `INATURALIST_ACCESS_TOKEN` when the snapshot should include metadata that is
+visible to the authenticated account but not to the public.
+The client requests the maximum supported page size, follows every page explicitly,
+validates response shapes and counts, and preserves the complete nested response for
+each observation.
+
+### Snapshot files
+
+Each snapshot contains:
+
+- `project.json`: complete project metadata.
+- `observations.jsonl`: the lossless metadataset, with one complete iNaturalist API
+  observation per line.
+- `observations.csv`: all top-level API fields. Nested fields such as photos,
+  identifications, taxon data, comments, observation fields, and tags are JSON-encoded
+  in their cells.
+- `sample_id_links.csv`: one row per observation/DBGI sample association, including
+  the exact source tag.
+- `manifest.json`: retrieval timestamp, project identity, record counts, unique
+  sample counts, duplicate-association counts, format version, and filenames.
+
+Sample IDs are extracted case-insensitively from tags containing an exact
+`dbgi_XXXXXX` identifier. For example, both `dbgi_001353` and
+`emi_external_id:DBGI_001353` map to the canonical sample ID `dbgi_001353`.
+Observations without a DBGI sample tag remain in the full dataset.
+
+### Python API
+
+```python
+from inaturalist_interact import INaturalistProjectClient, ProjectDatasetExporter
+
+dataset = INaturalistProjectClient().fetch_project(
+    "digital-botanical-gardens-initiative"
+)
+result = ProjectDatasetExporter().export(dataset, "data/exports/dbgi")
+print(result.observation_count)
+```
+
+The API client and exporter accept injected collaborators, so unit tests never need
+network access.
+
+## Legacy pushing workflow
+
+The existing upload workflow remains available while it is migrated to the new
+architecture.
 
 Dry-run the first three uploadable observations from the configured JBP inputs:
 

@@ -1,5 +1,6 @@
 # Ignore data folder
 inaturalist_interact/data
+data/exports/
 
 docs/source
 
