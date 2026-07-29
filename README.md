@@ -1,4 +1,4 @@
-# inat-fetcher
+# inaturalist-interact
 
 Utilities for preparing, fetching, and pushing DBGI observation data to iNaturalist.
 
@@ -21,7 +21,7 @@ uv run pytest -q
 Dry-run the first three uploadable observations from the configured JBP inputs:
 
 ```bash
-uv run python -m inat_fetcher.src.pusher --limit 3 --dry-run --verbose
+uv run python -m inaturalist_interact.src.pusher --limit 3 --dry-run --verbose
 ```
 
 ### iNaturalist token
@@ -33,7 +33,7 @@ For a live upload, the pusher needs an iNaturalist API token for the account tha
 3. Copy the token shown on that page.
 4. Provide it as `INATURALIST_ACCESS_TOKEN_TODAY`.
 
-You can put it in `inat_fetcher/src/.env`:
+You can put it in `inaturalist_interact/src/.env`:
 
 ```bash
 INATURALIST_ACCESS_TOKEN_TODAY=your_token_here
@@ -48,7 +48,7 @@ export INATURALIST_ACCESS_TOKEN_TODAY=your_token_here
 Then pass `--no-dry-run`:
 
 ```bash
-INATURALIST_ACCESS_TOKEN_TODAY=<token> uv run python -m inat_fetcher.src.pusher --limit 3 --no-dry-run --verify
+INATURALIST_ACCESS_TOKEN_TODAY=<token> uv run python -m inaturalist_interact.src.pusher --limit 3 --no-dry-run --verify
 ```
 
 ### Taxon resolution
@@ -60,7 +60,7 @@ For example, `Fascicularia kirchhoffiana` is not an iNaturalist taxon, so the pu
 Disable this behavior with:
 
 ```bash
-uv run python -m inat_fetcher.src.pusher --no-resolve-taxa
+uv run python -m inaturalist_interact.src.pusher --no-resolve-taxa
 ```
 
 ## Project wrapper

@@ -8,7 +8,7 @@ Notes:
   per-sample folders and recursive sample-id matches under the images root.
 
 Usage (dry run by default):
-    uv run python -m inat_fetcher.src.pusher \
+    uv run python -m inaturalist_interact.src.pusher \
         --limit 3 --verbose
 
 To actually create observations, pass `--no-dry-run` and ensure

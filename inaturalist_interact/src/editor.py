@@ -39,7 +39,7 @@ access_token = os.getenv("INATURALIST_ACCESS_TOKEN_TODAY")
 print(f"access_token: {access_token}")
 
 
-# To obtain actual path to inat_fetcher dir
+# Obtain the path to the inaturalist_interact package
 p = Path(__file__).parents[1]
 
 

@@ -24,7 +24,7 @@ uv run pytest -q
 Show pusher help:
 
 ```bash
-uv run python -m inat_fetcher.src.pusher --help
+uv run python -m inaturalist_interact.src.pusher --help
 ```
 
 ## First-three validation
@@ -46,7 +46,7 @@ Use `0`, `all`, or `unlimited` as the limit to process all remaining observation
 Dry-run the first three uploadable rows that have matched photos and usable coordinates:
 
 ```bash
-sudo -u cronuser uv run python -m inat_fetcher.src.pusher \
+sudo -u cronuser uv run python -m inaturalist_interact.src.pusher \
   --csv /media/data/nextcloud_data/emi/files/output/csv/jbp-new \
   --images-root /media/data/nextcloud_data/emi/files/output/pictures/jbp-new/jbp-new \
   --limit 3 \
@@ -60,7 +60,7 @@ Live upload the same first three only after dry-run review and with an iNaturali
 
 ```bash
 sudo -u cronuser env INATURALIST_ACCESS_TOKEN_TODAY="$INATURALIST_ACCESS_TOKEN_TODAY" \
-  uv run python -m inat_fetcher.src.pusher \
+  uv run python -m inaturalist_interact.src.pusher \
   --csv /media/data/nextcloud_data/emi/files/output/csv/jbp-new \
   --images-root /media/data/nextcloud_data/emi/files/output/pictures/jbp-new/jbp-new \
   --limit 3 \

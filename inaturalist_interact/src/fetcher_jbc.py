@@ -8,7 +8,7 @@ from pyinaturalist_convert import to_dataframe
 
 load_dotenv()
 
-# To obtain actual path to inat_fetcher dir
+# Obtain the path to the inaturalist_interact package
 p = Path(__file__).parents[1]
 
 # Set up paths and filenames

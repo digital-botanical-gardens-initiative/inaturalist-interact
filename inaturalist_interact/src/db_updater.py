@@ -21,7 +21,7 @@ directus_api = f"{directus_instance}/items/{collection_name}/"
 directus_email = os.getenv("DIRECTUS_EMAIL")
 directus_password = os.getenv("DIRECTUS_PASSWORD")
 
-# To obtain actual path to inat_fetcher dir
+# Obtain the path to the inaturalist_interact package
 p = Path(__file__).parents[1]
 
 # Load dataframe

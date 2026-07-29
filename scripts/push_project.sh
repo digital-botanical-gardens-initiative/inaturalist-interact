@@ -17,7 +17,7 @@ Notes:
   - Defaults to --dry-run.
   - Runs the pusher as cronuser when launched by another user.
   - Expects uv at /usr/local/bin/uv.
-  - Live upload requires INATURALIST_ACCESS_TOKEN_TODAY in inat_fetcher/src/.env
+  - Live upload requires INATURALIST_ACCESS_TOKEN_TODAY in inaturalist_interact/src/.env
     or otherwise visible to cronuser.
 EOF
 }
@@ -95,7 +95,7 @@ case "$limit" in
     ;;
 esac
 
-repo_dir="/git_repos/inat-fetcher"
+repo_dir="/git_repos/inaturalist-interact"
 csv_dir="/media/data/nextcloud_data/emi/files/output/csv/${project}"
 images_root="/media/data/nextcloud_data/emi/files/output/pictures/${project}/${project}"
 safe_project="${project//[^A-Za-z0-9_.-]/_}"
@@ -111,7 +111,7 @@ elif [[ -z "$allow_sample_ids" && -f "$default_allow_sample_ids" ]]; then
 fi
 
 pusher_args=(
-  -m inat_fetcher.src.pusher
+  -m inaturalist_interact.src.pusher
   --csv "$csv_dir"
   --images-root "$images_root"
   "${limit_args[@]}"
@@ -129,7 +129,7 @@ fi
 
 if [[ "$(id -un)" != "cronuser" ]]; then
   quoted_args=$(printf ' %q' "${original_args[@]}")
-  exec su - cronuser -c "cd '$repo_dir' && PATH=/usr/local/bin:/usr/bin:/bin UV_PROJECT_ENVIRONMENT=/home/cronuser/.venvs/inat-fetcher scripts/push_project.sh$quoted_args"
+  exec su - cronuser -c "cd '$repo_dir' && PATH=/usr/local/bin:/usr/bin:/bin UV_PROJECT_ENVIRONMENT=/home/cronuser/.venvs/inaturalist-interact scripts/push_project.sh$quoted_args"
 fi
 
 echo "Project: $project"
@@ -147,5 +147,5 @@ fi
 mkdir -p "$runtime_dir"
 cd "$repo_dir"
 export PATH=/usr/local/bin:/usr/bin:/bin
-export UV_PROJECT_ENVIRONMENT=/home/cronuser/.venvs/inat-fetcher
+export UV_PROJECT_ENVIRONMENT=/home/cronuser/.venvs/inaturalist-interact
 uv run python "${pusher_args[@]}"

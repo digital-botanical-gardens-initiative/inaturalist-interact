@@ -462,7 +462,7 @@ wheels = [
 ]
 
 [[package]]
-name = "inat-fetcher"
+name = "inaturalist-interact"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [

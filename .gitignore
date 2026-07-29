@@ -1,5 +1,5 @@
 # Ignore data folder
-inat_fetcher/data
+inaturalist_interact/data
 
 docs/source
 

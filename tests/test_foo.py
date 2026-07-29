@@ -1,4 +1,4 @@
-from inat_fetcher.src.foo import foo
+from inaturalist_interact.src.foo import foo
 
 
 def test_foo():

@@ -1,5 +1,5 @@
 [project]
-name = "inat-fetcher"
+name = "inaturalist-interact"
 version = "0.0.1"
 description = "iNaturalist fetch and push utilities"
 authors = [{ name = "Edouard Brulhart", email = "edouard.bruelhart@unifr.ch" }]
@@ -20,8 +20,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/digital-botanical-gardens-initiative/inat-fetcher"
-Documentation = "https://digital-botanical-gardens-initiative.github.io/inat-fetcher/"
+Repository = "https://github.com/digital-botanical-gardens-initiative/inaturalist-interact"
+Documentation = "https://digital-botanical-gardens-initiative.github.io/inaturalist-interact/"
 
 [dependency-groups]
 dev = [
@@ -37,7 +37,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.mypy]
-files = ["inat_fetcher"]
+files = ["inaturalist_interact"]
 disallow_untyped_defs = "True"
 disallow_any_unimported = "True"
 no_implicit_optional = "True"

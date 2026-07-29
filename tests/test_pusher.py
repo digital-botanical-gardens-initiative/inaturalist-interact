@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from inat_fetcher.src import pusher
+from inaturalist_interact.src import pusher
 
 
 def touch(path: Path) -> Path:

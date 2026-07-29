@@ -37,7 +37,7 @@ if response.status_code == 200:
         "Content-Type": "application/json",
     }
 
-# To obtain actual path to inat_fetcher dir
+# Obtain the path to the inaturalist_interact package
 p = Path(__file__).parents[1]
 
 # Load dataframe

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# To obtain the actual path to inat_fetcher dir
+# Obtain the path to the inaturalist_interact package
 p=$(dirname $(dirname $(realpath $0)))
 
 scripts_folder="/src/"
